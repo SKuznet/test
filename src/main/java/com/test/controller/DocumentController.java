@@ -3,6 +3,7 @@ package com.test.controller;
 import com.test.model.Document;
 import com.test.service.DocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,14 +15,14 @@ public class DocumentController {
     @Autowired
     DocumentService documentService;
 
-    @RequestMapping(value = "/add/", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public Document addDocument(@RequestBody Document document) {
         documentService.addDocument(document);
         return document;
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
     @ResponseBody
     public List<Document> getDocumentList() {
         return documentService.getDocumentList();
@@ -34,7 +35,7 @@ public class DocumentController {
         return document;
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public Document deleteDocument(@PathVariable(value = "id") String inputId) {
         return documentService.deleteDocument(Long.parseLong(inputId));

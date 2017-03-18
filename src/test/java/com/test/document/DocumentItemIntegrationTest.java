@@ -64,7 +64,7 @@ public class DocumentItemIntegrationTest {
         assertNotNull(documentItem.getId());
 
         ResponseEntity<String> responseEntity = restTemplate.exchange(
-                "http://localhost:8080/document-item/{id}",
+                "http://localhost:8080/document-item/delete/{id}",
                 HttpMethod.DELETE,
                 null,
                 String.class,
@@ -83,13 +83,13 @@ public class DocumentItemIntegrationTest {
     }
 
     @Test
-    public void getAllDocuments() {
+    public void getAllDocumentsItem() {
         RestTemplate restTemplate = new RestTemplate();
         createDocumentItem();
         createDocumentItem();
 
         ResponseEntity<List<DocumentItem>> result = restTemplate.exchange(
-                "http://localhost:8080/document-item/",
+                "http://localhost:8080/document-item/all",
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<DocumentItem>>() {
@@ -108,7 +108,7 @@ public class DocumentItemIntegrationTest {
         HttpEntity<DocumentItem> httpEntity = new HttpEntity<>(documentItem, headers);
 
         DocumentItem result = restTemplate.exchange(
-                "http://localhost:8080/document-item/add/",
+                "http://localhost:8080/document-item/add",
                 HttpMethod.POST,
                 httpEntity,
                 DocumentItem.class).getBody();

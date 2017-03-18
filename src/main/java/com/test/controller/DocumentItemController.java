@@ -14,14 +14,14 @@ public class DocumentItemController {
     @Autowired
     DocumentItemService documentItemService;
 
-    @RequestMapping(value = "/add/", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public DocumentItem addDocumentItem(@RequestBody DocumentItem documentItem) {
         documentItemService.addDocumentItem(documentItem);
         return documentItem;
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
     @ResponseBody
     public List<DocumentItem> getDocumentList() {
         return documentItemService.getDocumentItemList();
@@ -34,7 +34,7 @@ public class DocumentItemController {
         return documentItem;
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public DocumentItem deleteDocumentItem(@PathVariable(value = "id") String inputId) {
         return documentItemService.deleteDocumentItem(Long.parseLong(inputId));

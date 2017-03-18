@@ -17,13 +17,20 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class DocumentIntegrationTest {
+    private final String ROOT = "http://localhost:8080/document";
+    private final String GET_ID = "/get/with/id";
+    private final String ADD = ROOT + "/add";
+    private final String UPDATE = "/update";
+    private final String DELETE = "/delete";
+    private final String GET_ALL = ROOT + "/all";
+
     @Test
     public void addDocument() {
         Document document = createDocument();
         RestTemplate restTemplate = new RestTemplate();
 
         ResponseEntity<Document> responseEntity = restTemplate.exchange(
-                "http://localhost:8080/document/get/with/id/{id}",
+                ROOT + GET_ID + "/{id}",
                 HttpMethod.GET,
                 null,
                 Document.class,
@@ -46,7 +53,7 @@ public class DocumentIntegrationTest {
 
         HttpEntity<Document> httpEntity = new HttpEntity<>(document, headers);
         Document resultUpdCompany = restTemplate.exchange
-                ("http://localhost:8080/document/update",
+                (ROOT + UPDATE,
                         HttpMethod.PUT,
                         httpEntity,
                         Document.class)
@@ -64,7 +71,7 @@ public class DocumentIntegrationTest {
 
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> responseEntity = restTemplate.exchange(
-                "http://localhost:8080/document/{id}",
+                ROOT + DELETE + "/{id}",
                 HttpMethod.DELETE,
                 null,
                 String.class,
@@ -73,7 +80,7 @@ public class DocumentIntegrationTest {
         assertEquals("OK", responseEntity.getStatusCode().getReasonPhrase());
 
         ResponseEntity<Document> checkDocumentIsExist = restTemplate.exchange(
-                "http://localhost:8080/document/get/with/id/{id}",
+                ROOT + GET_ID + "/{id}",
                 HttpMethod.GET,
                 null,
                 Document.class,
@@ -89,7 +96,7 @@ public class DocumentIntegrationTest {
         createDocument();
 
         ResponseEntity<List<Document>> result = restTemplate.exchange(
-                "http://localhost:8080/document/",
+                GET_ALL,
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<Document>>() {
@@ -130,7 +137,7 @@ public class DocumentIntegrationTest {
         HttpEntity<Document> httpEntity = new HttpEntity<>(document, headers);
         RestTemplate restTemplate = new RestTemplate();
         Document result = restTemplate.exchange(
-                "http://localhost:8080/document/add/",
+                ADD,
                 HttpMethod.POST,
                 httpEntity,
                 Document.class).getBody();
