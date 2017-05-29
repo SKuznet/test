@@ -42,12 +42,11 @@
                 }
             });
         };
-        var RestPost = function () {
+        var RestPost = function (client_name, current_time) {
             var JSONObject = {
-                'name': $('#postName').val(),
-                'code': $('#postCode').val(),
-                'date': $('#postDate').val(),
-                'documentItem': $('#postDocumentItem').val()
+                'client': 'client_name',
+                'date': 'current_time',
+                'product_map': $('#postDocumentItem').val()
             };
             $.ajax({
                 type: 'POST',

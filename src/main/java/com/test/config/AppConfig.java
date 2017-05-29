@@ -9,6 +9,7 @@ import com.test.model.DocumentItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
 @Configuration
 public class AppConfig {
@@ -16,6 +17,7 @@ public class AppConfig {
     HibernateConfig hibernateConfig;
 
     @Bean
+    @Scope("")
     DocumentDao documentDao() {
         return  new DocumentDaoImpl(Document.class);
     }

@@ -16,7 +16,6 @@ import org.springframework.web.servlet.view.JstlView;
 public class WebConfig extends WebMvcConfigurerAdapter {
 
     public WebConfig() {
-
     }
 
     @Bean
